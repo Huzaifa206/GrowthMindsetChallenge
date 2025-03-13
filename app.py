@@ -3,40 +3,25 @@ import pandas as pd # type: ignore
 import os
 from io import BytesIO
 
-# Configure the Streamlit app's appearance and layout
-# 'page_title' sets the browser tab title
-# 'layout="wide"' allows more horizontal space, improving the display for tables and graphs
 st.set_page_config(page_title="Data Sweeper", layout="wide")
 
-# Custom CSS for styling the app with dark mode aesthetics
-# This enhances the UI by setting background colors, button styles, and text formatting
-
-
-# Display the main app title and introductory text
-st.title("Advanced Data Sweeper")  # Large, eye-catching title
+st.title("Advanced Data Sweeper")  
 st.write("Transform your files between CSV and Excel formats with built-in data cleaning and visualization.")
 
-# File uploader widget that accepts CSV and Excel files
-# 'accept_multiple_files=True' allows batch uploading multiple files at once
 uploaded_files = st.file_uploader("Upload your files (CSV or Excel):", type=["csv", "xlsx"], accept_multiple_files=True)
 
-# Processing logic for uploaded files (if any files are uploaded)
 if uploaded_files:
     for file in uploaded_files:
-        # Extract the file extension to determine if it's CSV or Excel
         file_extension = os.path.splitext(file.name)[-1].lower()
         
-        # Read the uploaded file into a pandas DataFrame based on its extension
         if file_extension == ".csv":
-            df = pd.read_csv(file)  # Read CSV files
+            df = pd.read_csv(file) 
         elif file_extension == ".xlsx":
-            df = pd.read_excel(file)  # Read Excel files
+            df = pd.read_excel(file)  
         else:
-            # Show an error message if the file type is unsupported
             st.error(f"Unsupported file type: {file_extension}")
             continue
         
-        # Display uploaded file information (name and size)
         st.write(f"**📄 File Name:** {file.name}")
         st.write(f"**📏 File Size:** {file.size / 1024:.2f} KB")  # File size in KB
 
