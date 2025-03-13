@@ -1,5 +1,5 @@
 import streamlit as st  # type: ignore
-import sympy as sp # type: ignore
+import sympy as sp 
 
 st.title("Growth mindset Challenge")
 
